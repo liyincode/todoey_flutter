@@ -1,4 +1,6 @@
+import 'package:ag/widgets/tasks_list.dart';
 import 'package:flutter/material.dart';
+
 
 class TaskScreen extends StatelessWidget {
   @override
@@ -41,7 +43,6 @@ class TaskScreen extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 50.0,
                         fontWeight: FontWeight.w700,
-
                       )),
                   Text('12 Tasks',
                       style: TextStyle(
@@ -54,12 +55,14 @@ class TaskScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20.0),
                     topRight: Radius.circular(20.0),
                   )),
+              child: TasksList(),
             ),
           )
         ],
@@ -67,3 +70,6 @@ class TaskScreen extends StatelessWidget {
     );
   }
 }
+
+
+
