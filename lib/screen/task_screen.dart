@@ -1,7 +1,9 @@
+import 'package:ag/models/task_data.dart';
 import 'package:ag/screen/add_task_screen.dart';
 import 'package:ag/widgets/tasks_list.dart';
 import 'package:flutter/material.dart';
 import 'package:ag/models/Task.dart';
+import 'package:provider/provider.dart';
 
 class TaskScreen extends StatefulWidget {
   @override
@@ -29,7 +31,7 @@ class _TaskScreenState extends State<TaskScreen> {
               (newTaskTitle) {
                 print(newTaskTitle);
                 setState(() {
-                  tasks.add(Task(name: newTaskTitle));
+                  context.read<TaskData>().add(Task(name: newTaskTitle));
                 });
                 Navigator.pop(context);
               },
@@ -70,7 +72,7 @@ class _TaskScreenState extends State<TaskScreen> {
                         fontSize: 50.0,
                         fontWeight: FontWeight.w700,
                       )),
-                  Text('${tasks.length} Tasks',
+                  Text('${context.watch<TaskData>().tasks.length} Tasks',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18.0,
@@ -88,7 +90,7 @@ class _TaskScreenState extends State<TaskScreen> {
                     topLeft: Radius.circular(20.0),
                     topRight: Radius.circular(20.0),
                   )),
-              child: TasksList(tasks),
+              child: TasksList(),
             ),
           )
         ],
