@@ -4,23 +4,27 @@ import 'package:provider/provider.dart';
 
 import 'task_title.dart';
 import 'package:ag/models/task_data.dart';
-class TasksList extends StatelessWidget {
 
+class TasksList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return TaskTitle(
-          isChecked: context.watch<TaskData>().tasks[index].isDone,
-          taskTitle: context.watch<TaskData>().tasks[index].name,
-          checkboxCallback: (newValue) {
+    return Consumer<TaskData>(
+      builder: (context, taskData, child) {
+        return ListView.builder(
+          itemBuilder: (context, index) {
+            return TaskTitle(
+              isChecked: taskData.tasks[index].isDone,
+              taskTitle: taskData.tasks[index].name,
+              checkboxCallback: (newValue) {
 //            setState(() {
 //              widget.tasks[index].toggleCheck();
 //            });
+              },
+            );
           },
+          itemCount: taskData.tasks.length,
         );
       },
-      itemCount: context.watch<TaskData>().tasks.length,
     );
   }
 }
