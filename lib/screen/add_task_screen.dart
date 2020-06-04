@@ -1,14 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ag/models/task_data.dart';
 
 class AddTaskScreen extends StatelessWidget {
-
-  final Function newTaskTitleCallback;
-  AddTaskScreen(this.newTaskTitleCallback);
-
   @override
   Widget build(BuildContext context) {
-  String newTaskTitle;
+    String newTaskTitle;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       decoration: BoxDecoration(
@@ -38,11 +36,15 @@ class AddTaskScreen extends StatelessWidget {
           ),
           FlatButton(
             onPressed: () {
-              newTaskTitleCallback(newTaskTitle);
+              context.read<TaskData>().addTask(newTaskTitle);
+              Navigator.pop(context);
             },
             child: Text(
               'Add',
-              style: TextStyle(color: Colors.white, fontSize: 20.0),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20.0,
+              ),
             ),
             color: Colors.lightBlueAccent,
           )
