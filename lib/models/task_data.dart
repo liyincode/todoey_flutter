@@ -20,4 +20,9 @@ class TaskData with ChangeNotifier {
     _tasks.add(task);
     notifyListeners();
   }
+
+  void updateTask(Task task) {
+    task.toggleCheck();
+    notifyListeners();
+  }
 }
